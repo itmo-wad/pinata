@@ -27,12 +27,21 @@
     <br>
 
     
-    <form id="text" method="get | post">
+    <form id="text" method="POST" action="/">
         <div>
             <p><textarea name="search" placeholder="Input wishlist ID" required form="text"></textarea></p>
-            <p><button type="submit" form="data" id="id_button1">Find wishlist</button></p>
+            <input type="submit" id="id_button1" value="Find wishlist">
         </div>
     </form>
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			<ul class=flashes>
+			{% for message in messages %}
+			<li>{{ message }}</li>
+			{% endfor %}
+			</ul>
+		{% endif %}
+	{% endwith %}
     
     <script src="../static/script.js">
     </script>
