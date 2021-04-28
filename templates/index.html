@@ -7,12 +7,14 @@
 </head>
 
 <body>
-    
+
     <div class="buttons">
+      <p><a href="{{ url_for('auth') }}" class="but">Sign In</a>
+         <a href="{{ url_for('register') }}" class="but">Register</a>
         <button class="but" id="id_button2">Sign In</button>
         <button class="but" id="id_button3">Register</button>
     </div>
-    
+
     <h1 id="head">Piñata</h1>
 
     <div id="picture">
@@ -26,7 +28,7 @@
     </div>
     <br>
 
-    
+
     <form id="text" method="POST" action="/">
         <div>
             <p><textarea name="search" placeholder="Input wishlist ID" required form="text"></textarea></p>
@@ -42,7 +44,7 @@
 			</ul>
 		{% endif %}
 	{% endwith %}
-    
+
     <script src="../static/script.js">
     </script>
 

@@ -1,11 +1,30 @@
-from flask import Flask, request, flash, render_template, send_from_directory
-from pymongo import MongoClient 
+from flask import Flask, request, flash, render_template, send_from_directory, redirect, url_for
+from flask_login import LoginManager, login_required, logout_user, UserMixin, login_user, current_user
+from pymongo import MongoClient
 from src.search import wl_search, wl_show
+from src.auth import login
 
-client = MongoClient('localhost',27017)
+client = MongoClient('localhost', 27017)
 db = client.pinata
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'the random string'
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+
+# The User Model for Flask-Login
+class User(UserMixin):
+    def __init__(self, username, password):
+        self.id = username
+        self.username = username
+        self.password = password
+
+
+# User Loader Function
+@login_manager.user_loader
+def load_user(username):
+    user = db.users.find_one({'username': username})
+    return User(username=user['username'], password=user['password'])
 
 
 @app.route('/favicon.ico')
@@ -19,12 +38,67 @@ def index():
         return wl_search(db)
     else:
         return render_template("index.html")
-        
-        
+
+
 @app.route('/wishlist/<string:listid>', methods=["GET", "POST"])
 def wihlist(listid):
     if request.method == "GET":
         return wl_show(db, listid)
+
+
+@app.route('/login', methods=['GET', 'POST'])
+def auth():
+    if current_user.is_authenticated:
+        return redirect(url_for('cabinet'))
+    if request.method == 'POST':
+        return login()
+    return render_template('login.html')
+
+
+# Add registration function
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password_1 = request.form.get('password1')
+        password_2 = request.form.get('password2')
+        if db.users.find_one({'username': username}):
+            return "Login is taken"
+        if password_1 != password_2:
+            return "Passwords don't match!"
+        if password_1 == "" or password_2 == "" or username == "":
+            return "Not all fields are filled in!"
+        else:
+            db.users.insert({'username': username, 'password': password_1})
+            return redirect('/login')
+    return render_template('register.html')
+
+
+#@app.route('/register', methods=['GET', 'POST'])
+#def register():
+    #if current_user.is_authenticated:
+        #return redirect(url_for('cabinet'))
+    #if request.method == 'POST':
+        #return register()
+    #return render_template('login.html')
+
+
+@app.route('/cabinet')
+@login_required
+def cabinet():
+    return render_template('cabinet.html', username=current_user.username)
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return redirect('/')
+
+
+@app.route('/invalid')
+def invalid():
+    return render_template('invalid.html')
 
 
 if __name__ == "__main__":

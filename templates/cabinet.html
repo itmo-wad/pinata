@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal cabinet</title>
+    <link href= "../static/style.css" rel="stylesheet">
+</head>
+
+<h1>Wow, you're in your personal cabinet. Congrats!</h1>
+<ul>
+    <li>Login: {{username}}</li>
+</ul>
+<p><a href="{{ url_for('logout') }}">Log out</a></p>
