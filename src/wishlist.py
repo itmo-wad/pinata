@@ -2,7 +2,6 @@ from flask import request, render_template, redirect
 from pymongo import MongoClient 
 import os
 from datetime import datetime
-#import json
 import ast
 
 
@@ -18,21 +17,22 @@ def wl_create(db, username):
     
     wl_title = request.form["wl-title"]  
     wl_description = request.form["description"]
-    #item_names = request.form.getlist("item-title[]")   #item-title[]
-    #links = request.form.getlist("item-link[]") #item-link[]
-    #descriptions = request.form.getlist("item-descr[]") #item-descr[]
+    item_names = request.form.getlist("item-title[]")   #item-title[]
+    links = request.form.getlist("item-link[]") #item-link[]
+    descriptions = request.form.getlist("item-descr[]") #item-descr[]
+    print(item_names,descriptions)
     
     items = []
     item_id = list_id + "-" + os.urandom(3).hex()
-    items.append(item_id)
-    #for i in range(len(item_names)-1):
-    #    while item_id in items:
-    #        itemid = list_id + "-" + os.urandom(3).hex()
-    #    items.append(item_id) 
+    for i in range(len(item_names)):
+        if i > 0:
+            while item_id in items:
+                item_id = list_id + "-" + os.urandom(3).hex()
+        items.append(item_id) 
     
     db.wishlists.insert({"listid":list_id, "title":wl_title, "owner":username, "description":wl_description, "items":str(items)})
     
-    #for i in range(len(items)):
-    #    db.items.insert({"itemid":items[i], "title":item_names[i], "description":descriptions[i], "link": links[i], "picture": "", "reserved":"0", "date":str(datetime.now()) })
+    for i in range(len(items)):
+        db.items.insert({"itemid":items[i], "title":item_names[i], "description":descriptions[i], "link": links[i], "picture": "", "reserved":"0", "date":str(datetime.now()) })
          
     return list_id 
