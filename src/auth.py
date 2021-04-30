@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_required, logout_user, UserMixin, login_user, current_user
 from pymongo import MongoClient
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -34,9 +34,15 @@ def login():
             login_user(user)
             return redirect('/cabinet')
         else:
-            return "Wrong password"
+            flash('Wrong password!')
+            return redirect(request.url)
     else:
-        return "user are not registered"
+        if password == "" or username == "":
+            flash('Not all fields are filled in!')
+            return redirect(request.url)
+        else:
+            flash('The user is not registered')
+            return redirect(request.url)
 
 
 def reg():
@@ -44,14 +50,17 @@ def reg():
     password_1 = request.form.get('password1')
     password_2 = request.form.get('password2')
     if db.users.find_one({'username': username}):
-        return "Login is taken"
+        flash('Login is already taken. Try again')
+        return redirect(request.url)
     if password_1 != password_2:
-        return "Passwords don't match!"
+        flash("Passwords don't match!")
+        return redirect(request.url)
     if password_1 == "" or password_2 == "" or username == "":
-        return "Not all fields are filled in!"
+        flash('Not all fields are filled in!')
+        return redirect(request.url)
     else:
         password = generate_password_hash(password_1)
-        db.users.insert({'username': username, 'password': password, 'photo': '', 'wishlists': "[]"})
+        db.users.insert({'username': username, 'password': password})
         return redirect('/login')
 
 

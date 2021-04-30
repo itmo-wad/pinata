@@ -4,8 +4,8 @@ from pymongo import MongoClient
 def wl_search(db):
     list_id = request.form["search"]
     if not db.wishlists.find_one({"listid":list_id}):
-        #flash("Invalid wishlist ID")
-        return render_template("index.html")
+        flash("Invalid wishlist ID")
+        return redirect(request.url)
     return redirect('wishlist/'+list_id)
     
     
