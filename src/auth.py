@@ -1,6 +1,7 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_login import LoginManager, login_required, logout_user, UserMixin, login_user, current_user
 from pymongo import MongoClient
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 client = MongoClient('localhost', 27017)
@@ -23,16 +24,19 @@ def load_user(username):
     return User(username=user['username'], password=user['password'])
 
 
-# @app.route('/login', methods=['GET', 'POST'])
 def login():
     username = request.form.get('username')
     password = request.form.get('password')
-    if db.users.find_one({'username': username, 'password': password}):
-        user = User(username=username, password=password)
-        login_user(user)
-        return redirect('/cabinet')
+    if db.users.find_one({'username': username}):
+        l_user = db.users.find_one({'username': username})
+        if check_password_hash(l_user['password'], password):
+            user = User(username=username, password=password)
+            login_user(user)
+            return redirect('/cabinet')
+        else:
+            return "Wrong password"
     else:
-        return redirect('/invalid')
+        return "user are not registered"
 
 
 def reg():
@@ -46,7 +50,8 @@ def reg():
     if password_1 == "" or password_2 == "" or username == "":
         return "Not all fields are filled in!"
     else:
-        db.users.insert({'username': username, 'password': password_1, 'photo': '', 'wishlists':"[]"})
+        password = generate_password_hash(password_1)
+        db.users.insert({'username': username, 'password': password, 'photo': '', 'wishlists': "[]"})
         return redirect('/login')
 
 
