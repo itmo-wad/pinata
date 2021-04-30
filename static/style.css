@@ -4,13 +4,8 @@ html{
 
 body{
     text-align: center;
-<<<<<<< HEAD
-    background: rgb(236, 194, 242)
-    
-=======
     background: linear-gradient( rgb(183, 86, 225), 20%, rgb(255, 255, 255), 88%, rgb(183, 86, 225));
 
->>>>>>> 1ac3c14b62cac184ed93656eef7a07a38586898f
 }
 
 h1{
