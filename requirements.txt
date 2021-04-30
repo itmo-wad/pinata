@@ -6,3 +6,4 @@ pymongo==3.11.3
 Flask-Login==0.5.0
 random
 datetime
+werkzeug.security

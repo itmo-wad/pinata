@@ -60,7 +60,7 @@ def reg():
         return redirect(request.url)
     else:
         password = generate_password_hash(password_1)
-        db.users.insert({'username': username, 'password': password})
+        db.users.insert({'username': username, 'password': password, 'photo': '', 'wishlists': "[]"})
         return redirect('/login')
 
 
