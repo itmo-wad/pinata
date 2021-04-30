@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create wishlist</title>
+    <link href= "../static/style_create.css" rel="stylesheet">
+</head>
+
+<body>
+<h1>Create your wishlist!</h1>
+  <form method="POST" action="/create">
+	  <label for="title">Wishlist name:</label>
+	  <input type="text" name="wl-title" required id="title">
+	  <br>
+	  <p><textarea name="description" placeholder="Input description for your new wishlist" required></textarea></p>
+	  <div id="DynamicExtraFieldsContainer">
+        <div id="addDynamicField">
+			<br>
+			<div class="DynamicExtraField">
+				<br>
+			    <label for="item">Item name:</label>
+				<input type="text" name="item-title[]" required id="item">
+				<label for="link">Reference:</label>
+				<input type="text" name="item-link[]" id="link" required placeholder="Input link to store">
+				<p><textarea name="item-descr[]" cols="50" required placeholder="Input description for your new item"></textarea></p>
+				<br>
+			</div>
+	    </div>
+	  </div>
+	  <br>
+	  <input type="button" id="addDynamicExtraFieldButton" value="Add item">
+	  <br><br>
+	  <input type="submit" value="Create">
+   </form>
+
+<p><a href="{{ url_for('logout') }}">Log out</a></p>
+
+<script src="../static/dynamic_form.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+</body>
+</html>
