@@ -15,7 +15,7 @@
                 <label for="login">Username:</label>
               </td>
               <td class="field">
-                <input type="text" id="login" name="username" placeholder="Your login">
+                <input type="text" name="username" placeholder="Your username"  onkeyup="var yratext=/[':',',','.','\s']/; if(yratext.test(this.value)) this.value=''">
               </td>
             </tr>
             <tr>
@@ -27,16 +27,25 @@
                 <label for="pass">Password:</label>
               </td>
               <td class="field">
-                <input type="password" id="pass" name="password" placeholder="Your password"></textarea>
+                <input type="password"  name="password" placeholder="Your password">
               </td>
             </tr>
             <tr>
               <td class="title"></td>
               <td class="field">
-                <input type="submit" class="btn" value="Sign in">
+                <input id="id_button1" type="submit" class="btn" value="Sign in">
               </td>
             </tr>
           </table>
         </form>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+          {% if messages %}
+            {% for category, message in messages %}
+              <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+              </div>
+            {% endfor %}
+          {% endif %}
+        {% endwith %}
   </body>
 </html>

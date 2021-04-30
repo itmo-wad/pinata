@@ -22,7 +22,7 @@
     </div>
 
     <div>
-        <h2 id="description">Boost your dreams to come true</h2>
+        <h2 id="description">Make dreams come true!</h2>
     </div>
     <br>
 
@@ -33,15 +33,15 @@
             <input type="submit" id="id_button1" value="Find wishlist">
         </div>
     </form>
-	{% with messages = get_flashed_messages() %}
-		{% if messages %}
-			<ul class=flashes>
-			{% for message in messages %}
-			<li>{{ message }}</li>
-			{% endfor %}
-			</ul>
-		{% endif %}
-	{% endwith %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
 
     <script src="../static/script.js">
     </script>

@@ -1,24 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-	<title>Register</title>
-	<link href= "../static/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+	  <title>Register</title>
+	   <link href= "../static/style.css" rel="stylesheet">
   </head>
+
   <body>
     <h1>Create account</h1>
-    <form method="POST" action="/register">
-	  <label for="name">Username:</label>
-	  <input type="text" name="username" id="name">
-	  <br><br>
-	  <label for="password1">Password:</label>
-	  <input type="password" name="password1" id="password1">
-	  <br><br>
-	  <label for="password2">Repeat password:</label>
-	  <input type="password" name="password2" id="password2">
-	  <br><br>
-	  <input type="submit" value="Sign up">
+      <form class="form" method="POST" action="/register">
+        <table>
+          <tr>
+            <td class="title">
+              <label for="name">Username:</label>
+            </td>
+            <td class="field">
+	             <input type="text" name="username" placeholder="Create username">
+	          </td>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+          </tr>
+          <tr>
+            <td class="title">
+	             <label for="password1">Password:</label>
+            </td>
+            <td class="field">
+	             <input type="password" name="password1" placeholder="Create password">
+            </td>
+          </tr>
+          <tr>
+            <td class="title">
+	             <label for="password2"></label>
+            </td>
+            <td class="field">
+	             <input type="password" name="password2" placeholder="Repeat password">
+            </td>
+          </tr>
+          <tr>
+            <td class="title"></td>
+            <td class="field">
+	             <input id="id_button1" type="submit" class="btn" value="Sign up">
+            </td>
+      </table>
     </form>
-	<br>
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      {% for category, message in messages %}
+        <div class="alert alert-{{ category }}" role="alert">
+          {{ message }}
+        </div>
+      {% endfor %}
+    {% endif %}
+  {% endwith %}
 	<!-- <a href="/">Sign in</a> -->
   </body>
 </html>

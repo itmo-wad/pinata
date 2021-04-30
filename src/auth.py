@@ -1,6 +1,7 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from flask_login import LoginManager, login_required, logout_user, UserMixin, login_user, current_user
 from pymongo import MongoClient
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
 client = MongoClient('localhost', 27017)
@@ -23,16 +24,25 @@ def load_user(username):
     return User(username=user['username'], password=user['password'])
 
 
-# @app.route('/login', methods=['GET', 'POST'])
 def login():
     username = request.form.get('username')
     password = request.form.get('password')
-    if db.users.find_one({'username': username, 'password': password}):
-        user = User(username=username, password=password)
-        login_user(user)
-        return redirect('/cabinet')
+    if db.users.find_one({'username': username}):
+        l_user = db.users.find_one({'username': username})
+        if check_password_hash(l_user['password'], password):
+            user = User(username=username, password=password)
+            login_user(user)
+            return redirect('/cabinet')
+        else:
+            flash('Wrong password!')
+            return redirect(request.url)
     else:
-        return redirect('/invalid')
+        if password == "" or username == "":
+            flash('Not all fields are filled in!')
+            return redirect(request.url)
+        else:
+            flash('The user is not registered')
+            return redirect(request.url)
 
 
 def reg():
@@ -40,13 +50,17 @@ def reg():
     password_1 = request.form.get('password1')
     password_2 = request.form.get('password2')
     if db.users.find_one({'username': username}):
-        return "Login is taken"
+        flash('Login is already taken. Try again')
+        return redirect(request.url)
     if password_1 != password_2:
-        return "Passwords don't match!"
+        flash("Passwords don't match!")
+        return redirect(request.url)
     if password_1 == "" or password_2 == "" or username == "":
-        return "Not all fields are filled in!"
+        flash('Not all fields are filled in!')
+        return redirect(request.url)
     else:
-        db.users.insert({'username': username, 'password': password_1, 'photo': '', 'wishlists':"[]"})
+        password = generate_password_hash(password_1)
+        db.users.insert({'username': username, 'password': password})
         return redirect('/login')
 
 

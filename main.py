@@ -23,6 +23,8 @@ class User(UserMixin):
         self.password = password
 
 
+
+
 # User Loader Function
 @login_manager.user_loader
 def load_user(username):
@@ -58,7 +60,6 @@ def auth():
     return render_template('login.html')
 
 
-# Add registration function
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     if current_user.is_authenticated:
