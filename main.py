@@ -4,6 +4,8 @@ from flask_login import LoginManager, login_required, logout_user, UserMixin, lo
 from pymongo import MongoClient
 from src.search import wl_search, wl_show
 from src.auth import login, reg
+from src.wishlist import wl_create
+
 
 client = MongoClient('localhost', 27017)
 db = client.pinata
@@ -70,6 +72,16 @@ def register():
 @login_required
 def cabinet():
     return render_template('cabinet.html', username=current_user.username)
+    
+
+@app.route('/create', methods=["GET", "POST"])
+@login_required
+def create():
+    if request.method == "GET":
+        return render_template('create_wl.html')
+    else:
+        list_id = wl_create(db, current_user.username)
+        return redirect(str('/wishlist/'+ list_id))
 
 
 @app.route('/logout')

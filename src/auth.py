@@ -46,7 +46,7 @@ def reg():
     if password_1 == "" or password_2 == "" or username == "":
         return "Not all fields are filled in!"
     else:
-        db.users.insert({'username': username, 'password': password_1})
+        db.users.insert({'username': username, 'password': password_1, 'photo': '', 'wishlists':"[]"})
         return redirect('/login')
 
 
