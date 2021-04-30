@@ -23,8 +23,6 @@ class User(UserMixin):
         self.password = password
 
 
-
-
 # User Loader Function
 @login_manager.user_loader
 def load_user(username):
@@ -46,7 +44,7 @@ def index():
 
 
 @app.route('/wishlist/<string:listid>', methods=["GET", "POST"])
-def wihlist(listid):
+def wishlist(listid):
     if request.method == "GET":
         return wl_show(db, listid)
 
@@ -82,7 +80,7 @@ def create():
         return render_template('create_wl.html')
     else:
         list_id = wl_create(db, current_user.username)
-        return redirect(str('/wishlist/'+ list_id))
+        return redirect('/wishlist/' + list_id)
 
 
 @app.route('/logout')

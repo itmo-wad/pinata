@@ -25,32 +25,26 @@
 
     <div class="description">
             <p class="name">Description</p>
-            <p>{{description}} Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus dicta, qui assumenda, doloremque, tempora ab recusandae quas natus dolore neque dolorum eius nostrum nemo possimus. Impedit deserunt molestiae voluptates laborum.</p>
+            <p>{{description}}</p>
     </div>
 
     <div class="items_wrap">
         <p id="title">ITEMS</p>
+        <!-- <form method="POST" action="/wishlist/{{id}}"> -->
         <div class="items">
-            
-            <div class="item" id="item1">
-                <p>item 1</p>
-                <img src="../static/pic/1.jpg" alt="" class="img_item">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. </p>
-            </div>
-            <div class="item" id="item2">
-                <p>item 2</p>
-                <img src="../static/pic/2.jpg" alt="" class="img_item">
-            </div>
-            <div class="item" id="item3">
-                <p>item 3</p>
-                <img src="../static/pic/3.jpeg" alt="" class="img_item">
-            </div>
-            <div class="item" id="item4">
-                <p>item 4</p>
-                <img src="../static/pic/4.jpg" alt="" class="img_item">
-           
-            </div>
+            {% for dict_item in items %}
+                <div class="item" id="item1">
+                    <p>{{dict_item['title']}}</p>
+                    <img src="{{dict_item['picture']}}" alt="" class="img_item">
+                    <p>{{dict_item['description']}}</p>
+                    <p>{{dict_item['link']}}</p>
+                    <p>Date of creation: {{ dict_item['date'] }}</p>
+                    <!-- <input type="checkbox" name="flag[]" value="1">  -->
+                </div>
+            {% endfor %}
         </div>
+        <!-- <p><input type="submit" value="Save"></p> -->
+        <!-- </form>-->
     </div>
   </body>
 </html>
