@@ -10,7 +10,7 @@
         <img src="../static/avatar.jpg" alt="avatar" class="avatar">
         <figcaption>{{owner}}</figcaption>
     </figure>
-    
+
     <div class="wrapper">
             <div class="div">
                 <p class="name">Whishlist id</p>
@@ -45,6 +45,10 @@
         </div>
         <!-- <p><input type="submit" value="Save"></p> -->
         <!-- </form>-->
+        <div class="buttons">
+            <a href="{{ url_for('index') }}" class="but"><button class="but" id="id_button2">Main page</button></a>
+            <a href="{{ url_for('cabinet') }}" class="but"><button class="but" id="id_button3" >Cabinet</button></a>
+        </div>
     </div>
   </body>
 </html>

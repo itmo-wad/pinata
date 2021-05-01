@@ -24,3 +24,12 @@ def wl_show(db, list_id):
                            owner=db.wishlists.find_one({"listid": list_id})['owner'],
                            description=db.wishlists.find_one({"listid": list_id})['description'],
                            items=items_dic)
+
+
+def wl_cabinet(db, username):
+    wishlists = ast.literal_eval(str(db.users.find_one({"username": username})["wishlists"]))
+    wishlists_dic = []
+    for i in range(len(wishlists)):
+        wishlists_dic.append(db.wishlists.find_one({"listid": wishlists[i]}))
+
+    return render_template('cabinet.html', username=username, wishlists=wishlists_dic)

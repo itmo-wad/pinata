@@ -2,7 +2,7 @@ import os
 from flask import Flask, request, flash, render_template, send_from_directory, redirect, url_for
 from flask_login import LoginManager, login_required, logout_user, UserMixin, login_user, current_user
 from pymongo import MongoClient
-from src.search import wl_search, wl_show
+from src.search import wl_search, wl_show, wl_cabinet
 from src.auth import login, reg
 from src.wishlist import wl_create
 
@@ -70,7 +70,11 @@ def register():
 @app.route('/cabinet')
 @login_required
 def cabinet():
-    return render_template('cabinet.html', username=current_user.username)
+    if request.method == "POST":
+        return wl_search(db)
+    else:
+        return wl_cabinet(db, current_user.username)
+        #return render_template('cabinet.html', username=current_user.username)
     
 
 @app.route('/create', methods=["GET", "POST"])
