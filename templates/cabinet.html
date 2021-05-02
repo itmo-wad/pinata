@@ -46,7 +46,8 @@
             <div class="wishlist" id="item1">
                 <p>{{dict_item['title']}}</p>
                 <p>{{dict_item['description']}}</p>
-                <p>{{dict_item['listid']}}</p>
+                <p><a href="{{ url_for('wishlist',list_id=dict_item['listid']) }}">Open</a></p>
+              <!--   <p>{{dict_item['listid']}}</p>-->
             </div>
         {% endfor %}
     </div>

@@ -27,41 +27,48 @@ def load_user(username):
 def login():
     username = request.form.get('username')
     password = request.form.get('password')
-    if db.users.find_one({'username': username}):
-        l_user = db.users.find_one({'username': username})
-        if check_password_hash(l_user['password'], password):
-            user = User(username=username, password=password)
-            login_user(user)
-            return redirect('/cabinet')
+    if username.isalnum():
+        if db.users.find_one({'username': username}):
+            l_user = db.users.find_one({'username': username})
+            if check_password_hash(l_user['password'], password):
+                user = User(username=username, password=password)
+                login_user(user)
+                return redirect('/cabinet')
+            else:
+                flash('Wrong password!')
+                return redirect(request.url)
         else:
-            flash('Wrong password!')
-            return redirect(request.url)
+            if password == "" or username == "":
+                flash('Not all fields are filled in!')
+                return redirect(request.url)
+            else:
+                flash('The user is not registered')
+                return redirect(request.url)
     else:
-        if password == "" or username == "":
-            flash('Not all fields are filled in!')
-            return redirect(request.url)
-        else:
-            flash('The user is not registered')
-            return redirect(request.url)
-
+        flash('Username should consist only of letters or numbers')
+        return redirect(request.url)
 
 def reg():
     username = request.form.get('username')
     password_1 = request.form.get('password1')
     password_2 = request.form.get('password2')
-    if db.users.find_one({'username': username}):
-        flash('Login is already taken. Try again')
-        return redirect(request.url)
-    if password_1 != password_2:
-        flash("Passwords don't match!")
-        return redirect(request.url)
-    if password_1 == "" or password_2 == "" or username == "":
-        flash('Not all fields are filled in!')
-        return redirect(request.url)
+    if username.isalnum():
+        if db.users.find_one({'username': username}):
+            flash('Login is already taken. Try again')
+            return redirect(request.url)
+        if password_1 != password_2:
+            flash("Passwords don't match!")
+            return redirect(request.url)
+        if password_1 == "" or password_2 == "" or username == "":
+            flash('Not all fields are filled in!')
+            return redirect(request.url)
+        else:
+            password = generate_password_hash(password_1)
+            db.users.insert({'username': username, 'password': password, 'photo': '../static/avatar.jpg', 'wishlists': "[]"})
+            return redirect('/login')
     else:
-        password = generate_password_hash(password_1)
-        db.users.insert({'username': username, 'password': password, 'photo': '../static/avatar.jpg', 'wishlists': "[]"})
-        return redirect('/login')
+        flash('Username should consist only of letters or numbers')
+        return redirect(request.url)
 
 
 if __name__ == "__main__":

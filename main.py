@@ -76,7 +76,6 @@ def cabinet():
         return update_avatar(db, current_user.username)
     else:
         return wl_cabinet(db, current_user.username)
-        #return render_template('cabinet.html', username=current_user.username)
     
 
 @app.route('/create', methods=["GET", "POST"])
@@ -94,11 +93,6 @@ def create():
 def logout():
     logout_user()
     return redirect('/')
-
-
-@app.route('/invalid')
-def invalid():
-    return render_template('invalid.html')
 
 
 if __name__ == "__main__":
