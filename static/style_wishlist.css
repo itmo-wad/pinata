@@ -41,15 +41,13 @@ h1{
 }
 
 .avatar {
-    width: 160px;
-    border-radius: 100px;
+    height: 200px; 
+    border-radius: 120px;
     padding: 10px;
-}
-
-.avatar {
     border: 2px solid #ff0000;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     margin-bottom: 10px;
+    
     
 }
 
