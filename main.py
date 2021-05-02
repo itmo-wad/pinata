@@ -5,6 +5,7 @@ from pymongo import MongoClient
 from src.search import wl_search, wl_show, wl_cabinet
 from src.auth import login, reg
 from src.wishlist import wl_create
+from src.upload import update_avatar
 
 
 client = MongoClient('localhost', 27017)
@@ -13,6 +14,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(16).hex()
 login_manager = LoginManager()
 login_manager.init_app(app)
+# app.config['UPLOAD_FOLDER'] = 'upload'
 
 
 # The User Model for Flask-Login
@@ -43,10 +45,10 @@ def index():
         return render_template("index.html")
 
 
-@app.route('/wishlist/<string:listid>', methods=["GET", "POST"])
-def wishlist(listid):
+@app.route('/wishlist/<string:list_id>', methods=["GET", "POST"])
+def wishlist(list_id):
     if request.method == "GET":
-        return wl_show(db, listid)
+        return wl_show(db, list_id)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -67,11 +69,11 @@ def register():
     return render_template('register.html')
 
 
-@app.route('/cabinet')
+@app.route('/cabinet', methods=['GET', 'POST'])
 @login_required
 def cabinet():
     if request.method == "POST":
-        return wl_search(db)
+        return update_avatar(db, current_user.username)
     else:
         return wl_cabinet(db, current_user.username)
         #return render_template('cabinet.html', username=current_user.username)
