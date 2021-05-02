@@ -10,9 +10,23 @@
 <h1> Hola, <b>{{username}}!</b></h1>
 
 <figure>
-    <img src="../static/avatar.jpg" alt="avatar" class="avatar">
+    <img src="{{photo}}" alt="avatar" class="avatar">
     <figcaption>{{owner}}</figcaption>
+    <form method="POST" enctype="multipart/form-data" action="/cabinet">
+		  <input type="file" name="file">
+		  <input type="submit" value="Update photo">
+    </form>
 </figure>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    {% for category, message in messages %}
+      <div class="alert alert-{{ category }}" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+{% endwith %}
 
 <form id="text" method="POST" action="/">
     <div>
@@ -40,15 +54,6 @@
     <!-- </form>-->
 </div>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }}" role="alert">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
 <p><a href="{{ url_for('logout') }}">Log out</a></p>
 <script src="../static/script.js">
 </script>

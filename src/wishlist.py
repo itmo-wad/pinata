@@ -13,12 +13,13 @@ def wl_create(db, username):
         list_id = username + "-" + os.urandom(3).hex()
         
     new_wl_list.append(list_id)    
-    db.users.update({"username":username}, {"$set": {"wishlists":str(new_wl_list)}})
+    db.users.update({"username": username}, {"$set": {"wishlists": str(new_wl_list)}})
     
     wl_title = request.form["wl-title"]  
     wl_description = request.form["description"]
     item_names = request.form.getlist("item-title[]")
     links = request.form.getlist("item-link[]")
+    photos = request.form.getlist("file[]")
     descriptions = request.form.getlist("item-descr[]")
     
     items = []
@@ -36,4 +37,4 @@ def wl_create(db, username):
         db.items.insert({"itemid": items[i], "title": item_names[i], "description": descriptions[i], "link": links[i],
                          "picture": "../static/pic/1.jpg", "reserved": "0", "date": str(datetime.now().date())})
          
-    return list_id 
+    return list_id
