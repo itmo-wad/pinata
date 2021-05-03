@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Create wishlist</title>
-<<<<<<< HEAD
-    <link href= "../static/style_create.css" rel="stylesheet">
-=======
     <link href= "../static/style.css" rel="stylesheet">
->>>>>>> 1ac3c14b62cac184ed93656eef7a07a38586898f
 </head>
 
 <body>
 <h1>Create your wishlist!</h1>
-  <form method="POST" action="/create">
+  <form method="POST" action="/create" enctype="multipart/form-data">
 	  <label for="title">Wishlist name:</label>
 	  <input type="text" name="wl-title" required id="title">
 	  <br>
@@ -25,9 +21,10 @@
 			    <label for="item">Item name:</label>
 				<input type="text" name="item-title[]" required id="item">
 				<label for="link">Reference:</label>
-				<input type="text" name="item-link[]" id="link" required placeholder="Input link to store">
-				<p><textarea name="item-descr[]" cols="50" required placeholder="Input description for your new item"></textarea></p>
-				<br>
+				<input type="text" name="item-link[]" id="link" placeholder="Input link to store">
+				<p><textarea name="item-descr[]" cols="50" placeholder="Input description for your new item"></textarea>
+				<input type="file" name="file[]"></p>
+                <br>
 			</div>
 	    </div>
 	  </div>
@@ -36,16 +33,11 @@
 	  <br><br>
 	  <input type="submit" value="Create">
    </form>
-
+<a href="{{ url_for('cabinet') }}" class="but"><button class="but" id="id_button3" >Cabinet</button></a>
 <p><a href="{{ url_for('logout') }}">Log out</a></p>
 
 <script src="../static/dynamic_form.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
 
 </body>
-<<<<<<< HEAD
 </html>
-=======
-</html>
-
->>>>>>> 1ac3c14b62cac184ed93656eef7a07a38586898f

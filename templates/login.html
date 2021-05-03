@@ -15,7 +15,7 @@
                 <label for="login">Username:</label>
               </td>
               <td class="field">
-                <input type="text" name="username" placeholder="Your username"  onkeyup="var yratext=/[':',',','.','\s']/; if(yratext.test(this.value)) this.value=''">
+                <input type="text" name="username" placeholder="Your username"  maxlength="25">
               </td>
             </tr>
             <tr>
@@ -47,5 +47,8 @@
             {% endfor %}
           {% endif %}
         {% endwith %}
+        <br></br>
+        <a href="{{ url_for('index') }}" class="but"><button class="but" id="id_button2">Main page</button></a>
+        <a href="{{ url_for('register') }}" class="but"><button class="but" id="id_button3" >Register</button></a>
   </body>
 </html>

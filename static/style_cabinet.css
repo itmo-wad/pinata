@@ -1,0 +1,108 @@
+body{
+    text-align: center;
+    background-color: rgba(225, 232, 238, 0.803);
+}
+
+h1{
+    font-size: 70px;
+    background: -webkit-linear-gradient(rgb(5, 2, 177), rgb(254, 50, 50));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+
+
+.div {
+    width: 235px;
+    border: 2px solid rgb(184, 184, 184);
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-right: 20px;
+    display: inline-block;
+    font-weight: bolder;
+    text-align: center;
+    background-color: white;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.description {
+    width: 700px;
+    border: 2px solid rgb(184, 184, 184);
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    font-weight: bolder;
+    text-align: center;
+    background-color: white;
+    position: relative;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.avatar {
+    width: 100px;
+    border-radius: 100px;
+    padding: 10px;
+}
+
+.avatar {
+    border: 2px solid #ff0000;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    margin-bottom: 10px;
+
+}
+
+figure {
+    margin-bottom: 50px;
+
+}
+figcaption {
+    font-size: 40px;
+    background: -webkit-linear-gradient(rgb(5, 2, 177), rgb(254, 50, 50));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.text {
+    font-size: 20px;
+    background: -webkit-linear-gradient(rgb(28, 5, 55), rgb(254, 162, 50));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.name{
+    text-decoration: underline ;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.wishlists{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    margin-bottom: 100px;
+    padding-bottom: 100px;
+    width: 1200px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+}
+
+.wishlist {
+    width: 235px;
+    height: 250px;
+    border-radius: 16px;
+    box-shadow: 0 0 10px rgba(142, 93, 238, 0.5);
+    margin-right: 20px;
+    font-weight: bolder;
+    background-color: white;
+    margin-bottom: 30px;
+
+}
+
+#title {
+    font-size: 50px;
+    text-decoration: underline;
+    background: -webkit-linear-gradient(rgb(5, 2, 177), rgb(254, 50, 50));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

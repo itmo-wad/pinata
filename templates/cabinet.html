@@ -12,8 +12,12 @@
     <div class="wrap1">
         <div class="main_img">
             <figure>
-                <img src="../static/avatar.jpg" alt="avatar" class="avatar">
-            <!-- <figcaption>{{owner}}</figcaption> -->
+              <img src="{{photo}}" alt="avatar" class="avatar">
+              <figcaption>{{owner}}</figcaption>
+              <form method="POST" enctype="multipart/form-data" action="/cabinet">
+                <input type="file" name="file">
+                <input type="submit" value="Update photo">
+              </form>
             </figure>
         </div>
 
@@ -34,6 +38,16 @@
     </div>
 </div>
 
+          {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+  
     <div class="wrap2">
         <form id="text" method="POST" action="/">
             <div>
@@ -53,12 +67,8 @@
                     <div class="wishlist" id="item1">
                         <p>{{dict_item['title']}}</p>
                         <p>{{dict_item['description']}}</p>
-                        <p>{{dict_item['listid']}}</p>
-                    </div>
-                    <div class="wishlist" id="item2">
-                        <p>{{dict_item['title']}}</p>
-                        <p>{{dict_item['description']}}</p>
-                        <p>{{dict_item['listid']}}</p>
+                        <p><a href="{{ url_for('wishlist',list_id=dict_item['listid']) }}">Open</a></p>
+                        <!--   <p>{{dict_item['listid']}}</p>-->
                     </div>
                 {% endfor %}
             </div>
@@ -66,19 +76,9 @@
             <!-- </form>-->
         </div>
     
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-            {% for category, message in messages %}
-            <div class="alert alert-{{ category }}" role="alert">
-                {{ message }}
-            </div>
-            {% endfor %}
-        {% endif %}
-        {% endwith %}
+
 
 </div>
-
-<script src="../static/script.js">
-</script>
+<script src="../static/script.js"></script>
 </body>
 </html>

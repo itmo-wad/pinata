@@ -15,7 +15,7 @@
               <label for="name">Username:</label>
             </td>
             <td class="field">
-	             <input type="text" name="username" placeholder="Create username">
+	             <input type="text" name="username" placeholder="Create username" maxlength="25">
 	          </td>
           </tr>
           <tr>
@@ -54,6 +54,7 @@
       {% endfor %}
     {% endif %}
   {% endwith %}
-	<!-- <a href="/">Sign in</a> -->
+  <br></br>
+  <a href="{{ url_for('index') }}" class="but"><button class="but" id="id_button2">Main page</button></a>
   </body>
 </html>
