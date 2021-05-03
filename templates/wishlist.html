@@ -37,7 +37,7 @@
                     <p>{{dict_item['title']}}</p>
                     <img src="../{{dict_item['picture']}}" alt="" class="img_item">
                     <p>{{dict_item['description']}}</p>
-                    <p>{{dict_item['link']}}</p>
+                    <p><a href="{{dict_item['link']}}">Link to shop website</a></p>
                     <p>Date of creation: {{ dict_item['date'] }}</p>
                     <!-- <input type="checkbox" name="flag[]" value="1">  -->
                 </div>
@@ -47,7 +47,8 @@
         <!-- </form>-->
         <div class="buttons">
             <a href="{{ url_for('index') }}" class="but"><button class="but" id="id_button2">Main page</button></a>
-            <a href="{{ url_for('cabinet') }}" class="but"><button class="but" id="id_button3" >Cabinet</button></a>
+           <!-- <a href="{{ url_for('cabinet') }}" class="but"><button class="but" id="id_button3" >Cabinet</button></a> -->
+            <a href="{{ url_for('auth') }}" class="but"><button class="but" id="id_button3" >{{go_back_link}}</button></a>
         </div>
     </div>
   </body>
