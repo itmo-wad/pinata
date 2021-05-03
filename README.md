@@ -1,2 +1,4 @@
 # pinata
 Repository for the group project - Pinata. Authors: Anna M., Diana O., Daniela N. 
+
+http://pinata.itmo.xyz/
