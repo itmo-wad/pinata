@@ -47,10 +47,15 @@
 
     <div class="wrap4">
         <div class="items_wrap">
-            <p id="title">Your wishlists</p>
+            <h1 id="title">Your wishlists</h1>
             <div class="wishlists">
                 {% for dict_item in wishlists %}
                     <div class="wishlist" id="item1">
+                        <p>{{dict_item['title']}}</p>
+                        <p>{{dict_item['description']}}</p>
+                        <p>{{dict_item['listid']}}</p>
+                    </div>
+                    <div class="wishlist" id="item2">
                         <p>{{dict_item['title']}}</p>
                         <p>{{dict_item['description']}}</p>
                         <p>{{dict_item['listid']}}</p>
@@ -71,12 +76,7 @@
         {% endif %}
         {% endwith %}
 
-    </div>
-
-    
-        
-
-
+</div>
 
 <script src="../static/script.js">
 </script>
