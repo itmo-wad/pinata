@@ -3,60 +3,82 @@
 <head>
     <meta charset="UTF-8">
     <title>Personal cabinet</title>
-    <link href= "../static/style_cabinet.css" rel="stylesheet">
+    <link href= "../static/cabinet.css" rel="stylesheet">
 </head>
 
 <body>
-<h1> Hola, <b>{{username}}!</b></h1>
+    <div class="flex"></div>
 
-<figure>
-    <img src="{{photo}}" alt="avatar" class="avatar">
-    <figcaption>{{owner}}</figcaption>
-    <form method="POST" enctype="multipart/form-data" action="/cabinet">
-		  <input type="file" name="file">
-		  <input type="submit" value="Update photo">
-    </form>
-</figure>
+    <div class="wrap1">
+        <div class="main_img">
+            <figure>
+              <img src="{{photo}}" alt="avatar" class="avatar">
+              <figcaption>{{owner}}</figcaption>
+              <form method="POST" enctype="multipart/form-data" action="/cabinet">
+                <input type="file" name="file">
+                <input type="submit" value="Update photo">
+              </form>
+            </figure>
+        </div>
 
-{% with messages = get_flashed_messages(with_categories=true) %}
-  {% if messages %}
-    {% for category, message in messages %}
-      <div class="alert alert-{{ category }}" role="alert">
-        {{ message }}
-      </div>
-    {% endfor %}
-  {% endif %}
-{% endwith %}
-
-<form id="text" method="POST" action="/">
-    <div>
-        <p><textarea name="search" placeholder="Input wishlist ID" required form="text"></textarea></p>
-        <input type="submit" id="id_button1" value="Find wishlist">
+        <div class="hola">
+            <h1> Hola, <b>{{username}}!</b></h1>
+        </div>
+        
     </div>
-</form>
-<br>
-<div class="button">
-    <a href="{{ url_for('create') }}" class="but"><button class="but">Create new wishlist</button></a>
+
+    <div class="wrap3">
+        <div class="button">
+            <a href="{{ url_for('create') }}" class="but"><button class="button2">+ New wishlist</button></a>
+        </div>
+    </div>
+
+    <div class="wrap5">
+        <button class="button3"><a href="{{ url_for('logout') }}">Log out</a></button>  
+    </div>
 </div>
 
-<div class="items_wrap">
-    <p id="title">Your wishlists</p>
-    <div class="wishlists">
-        {% for dict_item in wishlists %}
-            <div class="wishlist" id="item1">
-                <p>{{dict_item['title']}}</p>
-                <p>{{dict_item['description']}}</p>
-                <p><a href="{{ url_for('wishlist',list_id=dict_item['listid']) }}">Open</a></p>
-              <!--   <p>{{dict_item['listid']}}</p>-->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert">
+                {{ message }}
             </div>
-        {% endfor %}
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+  
+    <div class="wrap2">
+        <form id="text" method="POST" action="/">
+            <div>
+                <p><textarea name="search" placeholder="Input wishlist ID" required form="text"></textarea></p>
+                <input type="submit" id="id_button1" value="Find wishlist">
+            </div>
+        </form>
     </div>
-    <!-- <p><input type="submit" value="Save"></p> -->
-    <!-- </form>-->
-</div>
 
-<p><a href="{{ url_for('logout') }}">Log out</a></p>
-<script src="../static/script.js">
-</script>
+    
+
+    <div class="wrap4">
+        <div class="items_wrap">
+            <h1 id="title">Your wishlists</h1>
+            <div class="wishlists">
+                {% for dict_item in wishlists %}
+                    <div class="wishlist" id="item1">
+                        <p>{{dict_item['title']}}</p>
+                        <p>{{dict_item['description']}}</p>
+                        <p><a href="{{ url_for('wishlist',list_id=dict_item['listid']) }}">Open</a></p>
+                        <!--   <p>{{dict_item['listid']}}</p>-->
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- <p><input type="submit" value="Save"></p> -->
+            <!-- </form>-->
+        </div>
+    
+
+
+</div>
+<script src="../static/script.js"></script>
 </body>
 </html>

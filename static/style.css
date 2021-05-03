@@ -4,8 +4,7 @@ html{
 
 body{
     text-align: center;
-    background: rgb(236, 194, 242);
-   /* background: linear-gradient( rgb(183, 86, 225), 20%, rgb(255, 255, 255), 88%, rgb(183, 86, 225)); */
+    background-color: rgb(235, 197, 235);
 }
 
 h1{
@@ -71,7 +70,7 @@ textarea {
 
 .form {
   margin:auto;
-  width: 440px;
+  width: 600px;
 }
 
 .form td {
