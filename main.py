@@ -14,7 +14,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = os.urandom(16).hex()
 login_manager = LoginManager()
 login_manager.init_app(app)
-# app.config['UPLOAD_FOLDER'] = 'upload'
+app.config['UPLOAD_FOLDER'] = 'upload'
 
 
 # The User Model for Flask-Login
@@ -73,7 +73,7 @@ def register():
 @login_required
 def cabinet():
     if request.method == "POST":
-        return update_avatar(db, current_user.username)
+        return update_avatar(db, current_user.username, app)
     else:
         return wl_cabinet(db, current_user.username)
     
@@ -84,7 +84,7 @@ def create():
     if request.method == "GET":
         return render_template('create_wl.html')
     else:
-        list_id = wl_create(db, current_user.username)
+        list_id = wl_create(db, current_user.username, app)
         return redirect('/wishlist/' + list_id)
 
 
@@ -94,13 +94,21 @@ def logout():
     logout_user()
     return redirect('/')
 
+
 @app.errorhandler(401)
 def not_in(e):
     return redirect('/')
 
+
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+
+@app.route('/upload/<path:filename>')
+def send_from_upload(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
 
 if __name__ == "__main__":
     app.run(host='localhost', port=5000, debug=True)

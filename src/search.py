@@ -15,7 +15,7 @@ def wl_show(db, list_id):
         abort(404)
 
     username = db.wishlists.find_one({"listid": list_id})['owner']
-    avatar = db.users.find_one({"username": username})['photo']
+    avatar = '../' + db.users.find_one({"username": username})['photo']
     items = ast.literal_eval(str(db.wishlists.find_one({"listid": list_id})["items"]))
     items_dic = []
     for i in range(len(items)):

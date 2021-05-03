@@ -7,7 +7,7 @@
   <body>
     <h1>Wishlist</h1>
     <figure>
-        <img src="{{ photo }}" alt="avatar" class="avatar">
+        <img src="{{photo}}" alt="avatar" class="avatar">
         <figcaption>{{owner}}</figcaption>
     </figure>
 
@@ -35,7 +35,7 @@
             {% for dict_item in items %}
                 <div class="item" id="item1">
                     <p>{{dict_item['title']}}</p>
-                    <img src="{{dict_item['picture']}}" alt="" class="img_item">
+                    <img src="../{{dict_item['picture']}}" alt="" class="img_item">
                     <p>{{dict_item['description']}}</p>
                     <p>{{dict_item['link']}}</p>
                     <p>Date of creation: {{ dict_item['date'] }}</p>

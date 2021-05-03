@@ -1,13 +1,13 @@
-from flask import request, render_template, redirect
+from flask import request
 from pymongo import MongoClient 
 import os
 from datetime import datetime
 import ast
+from src.upload import update_item_photo
 
 
-def wl_create(db, username):
+def wl_create(db, username, app):
     list_id = username + "-" + os.urandom(3).hex()
-    new_wl_list = []
     new_wl_list = ast.literal_eval(str(db.users.find_one({"username":username})["wishlists"]))
     while list_id in new_wl_list:
         list_id = username + "-" + os.urandom(3).hex()
@@ -19,7 +19,6 @@ def wl_create(db, username):
     wl_description = request.form["description"]
     item_names = request.form.getlist("item-title[]")
     links = request.form.getlist("item-link[]")
-    photos = request.form.getlist("file[]")
     descriptions = request.form.getlist("item-descr[]")
     
     items = []
@@ -32,9 +31,17 @@ def wl_create(db, username):
     
     db.wishlists.insert({"listid": list_id, "title": wl_title, "owner": username, "description": wl_description,
                          "items": str(items)})
-    
+
+    if 'file[]' not in request.files:
+        paths = []
+        for i in range(len(items)):
+            paths.append("../static/default_item_photo.jpg")
+    else:
+        photos = request.files.getlist("file[]")
+        paths = update_item_photo(photos, app)
+
     for i in range(len(items)):
         db.items.insert({"itemid": items[i], "title": item_names[i], "description": descriptions[i], "link": links[i],
-                         "picture": "../static/pic/1.jpg", "reserved": "0", "date": str(datetime.now().date())})
-         
+                         "picture": paths[i], "reserved": "0", "date": str(datetime.now().date())})
+
     return list_id

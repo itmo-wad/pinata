@@ -11,7 +11,7 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
-def update_avatar(db, username):
+def update_avatar(db, username, app):
     if 'file' not in request.files:
         flash('No file part')
         return redirect(request.url)
@@ -21,10 +21,10 @@ def update_avatar(db, username):
         return redirect(request.url)
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file.save(os.path.join('static/upload/avatars', filename))
+        path = os.path.join(app.config['UPLOAD_FOLDER'], 'avatars', filename)
+        file.save(path)
         flash('Successfully saved', 'success')
-        avatar = "../static/upload/avatars/" + filename
-        db.users.update({"username": username}, {"$set": {"photo": avatar}})
+        db.users.update({"username": username}, {"$set": {"photo": path}})
         return redirect(request.url)
     else:
         flash('Wrong file\'s extension')
@@ -32,6 +32,17 @@ def update_avatar(db, username):
     #return redirect('/cabinet')
 
 
-#def update_item_photo(db):
+def update_item_photo(photos, app):
+    paths = []
+    for file in photos:
+        if file.filename == '' or not allowed_file(file.filename):
+            paths.append("../static/default_item_photo.jpg")
+        else:
+            filename = secure_filename(file.filename)
+            path = os.path.join(app.config['UPLOAD_FOLDER'], 'items_photo', filename)
+            file.save(path)
+            paths.append(path)
+    return paths
+
 
 

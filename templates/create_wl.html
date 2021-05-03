@@ -8,7 +8,7 @@
 
 <body>
 <h1>Create your wishlist!</h1>
-  <form method="POST" action="/create">
+  <form method="POST" action="/create" enctype="multipart/form-data">
 	  <label for="title">Wishlist name:</label>
 	  <input type="text" name="wl-title" required id="title">
 	  <br>
@@ -22,8 +22,8 @@
 				<input type="text" name="item-title[]" required id="item">
 				<label for="link">Reference:</label>
 				<input type="text" name="item-link[]" id="link" placeholder="Input link to store">
-				<p><textarea name="item-descr[]" cols="50" placeholder="Input description for your new item"></textarea></p>
-				<input type="file" name="file[]">
+				<p><textarea name="item-descr[]" cols="50" placeholder="Input description for your new item"></textarea>
+				<input type="file" name="file[]"></p>
                 <br>
 			</div>
 	    </div>
