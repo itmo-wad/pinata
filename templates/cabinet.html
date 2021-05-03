@@ -38,7 +38,7 @@
     </div>
 </div>
 
-          {% with messages = get_flashed_messages(with_categories=true) %}
+        {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
             <div class="alert alert-{{ category }}" role="alert">
@@ -49,7 +49,7 @@
         {% endwith %}
   
     <div class="wrap2">
-        <form id="text" method="POST" action="/">
+        <form id="text" method="POST" action="/cabinet">
             <div>
                 <p><textarea name="search" placeholder="Input wishlist ID" required form="text"></textarea></p>
                 <input type="submit" id="id_button1" value="Find wishlist">

@@ -10,7 +10,7 @@ def wl_search(db):
     return redirect('wishlist/' + list_id)
 
 
-def wl_show(db, list_id):
+def wl_show(db, list_id, link):
     if not db.wishlists.find_one({"listid": list_id}):
         abort(404)
 
@@ -25,7 +25,7 @@ def wl_show(db, list_id):
                            title=db.wishlists.find_one({"listid": list_id})['title'],
                            photo=avatar, owner=username,
                            description=db.wishlists.find_one({"listid": list_id})['description'],
-                           items=items_dic)
+                           items=items_dic, go_back_link=link)
 
 
 def wl_cabinet(db, username):

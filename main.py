@@ -42,13 +42,19 @@ def index():
     if request.method == "POST":
         return wl_search(db)
     else:
-        return render_template("index.html")
+        if current_user.is_authenticated:
+            return render_template("index.html", link="Cabinet")
+        else:
+            return render_template("index.html", link="Sign in")
 
 
 @app.route('/wishlist/<string:list_id>', methods=["GET", "POST"])
 def wishlist(list_id):
     if request.method == "GET":
-        return wl_show(db, list_id)
+        if current_user.is_authenticated:
+            return wl_show(db, list_id, 'Cabinet')
+        else:
+            return wl_show(db, list_id, 'Sing in')
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -73,7 +79,10 @@ def register():
 @login_required
 def cabinet():
     if request.method == "POST":
-        return update_avatar(db, current_user.username, app)
+        if request.form['search']:
+            return wl_search(db)
+        else:
+            return update_avatar(db, current_user.username, app)
     else:
         return wl_cabinet(db, current_user.username)
     
