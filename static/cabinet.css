@@ -27,17 +27,11 @@ body{
 }
 
 .wrap2{
-    background-color: rgba(242, 229, 244, 0.577);
     padding-bottom: 60px;
     display: block;
     padding-top: 50px;
     margin-bottom: 20px;
-   
 }
-
-
-
-
 
 
 .hola{
@@ -137,11 +131,11 @@ body{
     width: 235px;
     height: 350px;
     border-radius: 16px;
-    box-shadow: 0 0 10px rgba(142, 93, 238, 0.5);
+    box-shadow: 0 0 10px grey;
     margin-right: 20px;
     font-weight: bolder;
-    background-color: white;
     margin-bottom: 30px;
+    background-color:  white;
 }
 
 #title{
