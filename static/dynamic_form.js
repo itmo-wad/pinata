@@ -3,8 +3,6 @@ document.getElementById("addDynamicExtraFieldButton").onclick = function(event) 
 	let div = document.createElement("div");
 	div.className = "DynamicExtraField";
 	$("<br>").appendTo(div);
-	$('<hr>').appendTo(div);
-	$('<br>').appendTo(div);
     $('<input/>', {value : 'Remove item', type : 'button', 'class' : 'DeleteDynamicExtraField'}).appendTo(div).click(function(e) {
 		$(this).parent().remove();
 		e.preventDefault();
@@ -25,7 +23,8 @@ document.getElementById("addDynamicExtraFieldButton").onclick = function(event) 
 	$('<br>').appendTo(div);
 	$('<input/>', {name : 'file[]', type : 'file', class: 'forma'}).appendTo(div); // <input type="file" name="file[]">
 	$('</p>').appendTo(div);
-	
+	$('<hr>').appendTo(div);
+	$('<br>').appendTo(div);
  //Добавляем уже собранный DIV в DynamicExtraFieldsContainer
 	$(div).appendTo("#DynamicExtraFieldsContainer");
 	
