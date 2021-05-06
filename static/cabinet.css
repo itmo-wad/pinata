@@ -1,10 +1,22 @@
 body{
-    text-align: center;
+    margin-top: 40px;
     background-color: rgba(252, 252, 252, 0.577);
+    background-image: url("back.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+.inp{
+    border: 2px  solid rgb(6, 6, 6);
 }
 
 .avatar {
-    height: 200px; 
+    height: 200px;
     border-radius: 120px;
     padding: 10px;
     border: 2px solid #ff0000;
@@ -14,36 +26,42 @@ body{
 }
 
 .wrap1{
-    background-color: rgb(250, 228, 252);
+    background-color: rgba(234, 228, 252) ;
     padding-bottom: 60px;
-    margin-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
     padding-top: 20px;
-    display: block;
-    margin-left: 30%;
-    margin-right: 30%;
+    text-align: center;
     border-radius: 40px;
     margin-bottom: 40px;
+    border: 2px  solid grey;
 
 }
 
+.pull{
+    text-align: center;
+    margin-top: 30px;
+
+}
 .wrap2{
     padding-bottom: 60px;
-    display: block;
     padding-top: 50px;
     margin-bottom: 20px;
+    text-align: center;
+
 }
 
 
 .hola{
-    
+
     background: -webkit-linear-gradient(rgb(5, 2, 177), rgb(254, 50, 50));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
 #id_button1{
-    background-color: #f0ecb3;
-    border: 2px solid rgb(200, 162, 226);
+    background-color: rgb(244, 228, 252);
+    border: 2px solid rgb(7, 7, 7);
     color: rgb(54, 13, 75);
     padding: 20px 32px;
     text-align: center;
@@ -55,7 +73,7 @@ body{
  }
 
  .button2{
-    background-color: #f0ecb3;
+    background-color: #ffffff;
     border: 2px solid rgb(182, 182, 151);
     color: rgb(23, 25, 99);
     text-align: center;
@@ -68,9 +86,9 @@ body{
  }
 
  .button3{
-    background-color: #d1d7f2;
+    background-color: #ffffff;
     border: 2px solid rgb(182, 182, 151);
-    color: rgb(54, 13, 75);
+    color: rgb(68, 19, 93);
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -102,19 +120,7 @@ body{
     text-align: center;
  }
 
- .wrap3
- {
-    position: absolute;
-    top: 5%; 
-    right: 5%;
-}
 
-
-.wrap5{
-    position: absolute;
-    top: 15%; 
-    right: 5%;
-}
 
 .wishlists{
     display: flex;
@@ -122,25 +128,53 @@ body{
     margin-top: 20px;
     margin-bottom: 100px;
     padding-bottom: 100px;
-    
     flex-wrap: wrap;
-    
+
 }
 
 .wishlist{
+    background-color: rgb(244, 228, 252, 0.99);
     width: 235px;
-    height: 350px;
+    height: 280px;
     border-radius: 16px;
     box-shadow: 0 0 10px grey;
-    margin-right: 20px;
+
     font-weight: bolder;
     margin-bottom: 30px;
-    background-color:  white;
+    text-align: center;
+
 }
 
+
+.items_wrap{
+    margin: 0 auto;
+}
 #title{
     font-size: 50px;
     background: -webkit-linear-gradient(rgb(5, 2, 177), rgb(254, 50, 50));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
+    text-align: center;
+    margin-bottom: 50px;
   }
+
+.title_item{
+    padding-top: 30px;
+}
+
+#flash{
+    color: white;
+    text-align: center;
+}
+
+.wrap4{
+        width: auto;
+        margin-left: 10px;
+}
+
+@media screen and (max-width: 996px) {
+    .wrap1{
+        width: 400px;
+
+    }
+}
