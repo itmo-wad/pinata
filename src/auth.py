@@ -64,7 +64,7 @@ def reg():
             return redirect(request.url)
         else:
             password = generate_password_hash(password_1)
-            db.users.insert({'username': username, 'password': password, 'photo': '../static/avatar.jpg', 'wishlists': "[]"})
+            db.users.insert({'username': username, 'password': password, 'photo': '../static/avatar.jpg', 'wishlists': []})
             return redirect('/login')
     else:
         flash('Username should consist only of letters or numbers')

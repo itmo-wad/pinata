@@ -4,7 +4,7 @@ from flask_login import LoginManager, login_required, logout_user, UserMixin, lo
 from pymongo import MongoClient
 from src.search import wl_search, wl_show, wl_cabinet
 from src.auth import login, reg
-from src.wishlist import wl_create, wl_edit, add_new_list_id, wl_update
+from src.wishlist import wl_create, wl_edit, add_new_list_id, wl_update, wl_delete
 from src.upload import update_avatar
 
 
@@ -101,13 +101,24 @@ def create():
 @app.route('/edit/<string:list_id>', methods=["GET", "POST"])
 @login_required
 def edit(list_id):
-    if request.method == "GET":
-        if current_user.is_authenticated and db.wishlists.find_one({"listid": list_id, "owner": current_user.username}):
+    if current_user.is_authenticated and db.wishlists.find_one({"listid": list_id, "owner": current_user.username}):
+        if request.method == "GET":
             return wl_edit(list_id, db)
-        else:
-            return redirect(url_for('page_not_found'))
-    if request.method == "POST":
-        return wl_update(list_id, db, current_user.username, app)
+        if request.method == "POST":
+            return wl_update(list_id, db, current_user.username, app)
+    else:
+        return render_template('invalid.html')
+
+@app.route('/delete/<string:list_id>', methods=["GET", "POST"])
+@login_required
+def delete(list_id):
+    if current_user.is_authenticated and db.wishlists.find_one({"listid": list_id, "owner": current_user.username}):
+        if request.method == "GET":
+            return render_template('delete.html')
+        if request.method == "POST":
+            return wl_delete(list_id, db, current_user.username)
+    else:
+        return redirect('/')
 
 
 @app.route('/logout')

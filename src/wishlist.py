@@ -1,5 +1,5 @@
-from flask import request, render_template, redirect
-from pymongo import MongoClient 
+from flask import request, render_template, redirect, url_for
+from pymongo import MongoClient
 import os
 from datetime import datetime
 import ast
@@ -13,25 +13,25 @@ def add_new_list_id(username, db):
         list_id = username + "-" + os.urandom(3).hex()
 
     new_wl_list.append(list_id)
-    db.users.update({"username": username}, {"$set": {"wishlists": str(new_wl_list)}})
+    db.users.update({"username": username}, {"$set": {"wishlists": new_wl_list}})
     return list_id
 
 
 def wl_create(db, username, list_id, app):
-    wl_title = request.form["wl-title"]  
+    wl_title = request.form["wl-title"]
     wl_description = request.form["description"]
     item_names = request.form.getlist("item-title[]")
     links = request.form.getlist("item-link[]")
     descriptions = request.form.getlist("item-descr[]")
-    
+
     items = []
     item_id = list_id + "-" + os.urandom(3).hex()
     for i in range(len(item_names)):
         if i > 0:
             while item_id in items:
                 item_id = list_id + "-" + os.urandom(3).hex()
-        items.append(item_id) 
-    
+        items.append(item_id)
+
     db.wishlists.insert({"listid": list_id, "title": wl_title, "owner": username, "description": wl_description,
                          "items": str(items)})
 
@@ -82,9 +82,10 @@ def wl_update(list_id, db, username, app):
         for i in range(len(item_names)):
             if i < num_old:
                 items.append(old_ids[i])
-                db.items.update({"itemid": old_ids[i]}, {"$set": {"title": item_names[i],"description": descriptions[i],
-                                 "link": links[i], "picture": paths[i], "reserved": "0",
-                                 "date": str(datetime.now().date())}})
+                db.items.update({"itemid": old_ids[i]},
+                                {"$set": {"title": item_names[i], "description": descriptions[i],
+                                          "link": links[i], "picture": paths[i], "reserved": "0",
+                                          "date": str(datetime.now().date())}})
             else:
                 item_id = list_id + "-" + os.urandom(3).hex()
                 while item_id in items:
@@ -99,4 +100,15 @@ def wl_update(list_id, db, username, app):
 
         return redirect('../wishlist/' + list_id)
     else:
-        return "<script>alert('we will delete everything')</script>"
+        return wl_delete(list_id, db, username)
+        #return "<script>alert('we will delete everything')</script>"
+
+
+def wl_delete(list_id, db, username):
+    items = ast.literal_eval(str(db.wishlists.find_one({"listid": list_id})["items"]))
+    for i in range(len(items)):
+        db.items.remove({"itemid": items[i]})
+    db.users.update({"username": username}, {"$pull": {'wishlists': list_id}})
+    db.wishlists.remove({"listid": list_id})
+
+    return redirect('/cabinet')

@@ -24,7 +24,7 @@
         <div class="hola">
             <h1> Hola, <b>{{username}}!</b></h1>
         </div>
-        
+
     </div>
 
     <div class="wrap3">
@@ -34,7 +34,7 @@
     </div>
 
     <div class="wrap5">
-        <button class="button3"><a href="{{ url_for('logout') }}">Log out</a></button>  
+        <button class="button3"><a href="{{ url_for('logout') }}">Log out</a></button>
     </div>
 </div>
 
@@ -47,7 +47,7 @@
             {% endfor %}
         {% endif %}
         {% endwith %}
-  
+
     <div class="wrap2">
         <form id="text" method="POST" action="/cabinet">
             <div>
@@ -57,7 +57,7 @@
         </form>
     </div>
 
-    
+
 
     <div class="wrap4">
         <div class="items_wrap">
@@ -69,14 +69,15 @@
                         <p>{{dict_item['description']}}</p>
                         <p><a href="{{ url_for('wishlist',list_id=dict_item['listid']) }}">Open</a></p>
                         <p><a href="{{ url_for('edit',list_id=dict_item['listid']) }}">Edit</a></p>
-                        <!--   <p>{{dict_item['listid']}}</p>-->
+                        <p><a href="{{ url_for('delete',list_id=dict_item['listid']) }}">Delete</a></p>
+                        <p>ID: {{dict_item['listid']}}</p>
                     </div>
                 {% endfor %}
             </div>
             <!-- <p><input type="submit" value="Save"></p> -->
             <!-- </form>-->
         </div>
-    
+
 
 
 </div>
