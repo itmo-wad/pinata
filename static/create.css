@@ -24,6 +24,7 @@ h1{
     border: 1px solid rgb(6, 6, 11);
     margin: auto 12%;
     padding: 30px;
+    font-size: 25px;
 }
 
 .button{
@@ -59,8 +60,8 @@ h1{
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 10px;
-    border-radius: 8px;
+    font-size: 18px;
+    border-radius: 14px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
     width: 190px;
 }

@@ -68,6 +68,7 @@
                         <p>{{dict_item['title']}}</p>
                         <p>{{dict_item['description']}}</p>
                         <p><a href="{{ url_for('wishlist',list_id=dict_item['listid']) }}">Open</a></p>
+                        <p><a href="{{ url_for('edit',list_id=dict_item['listid']) }}">Edit</a></p>
                         <!--   <p>{{dict_item['listid']}}</p>-->
                     </div>
                 {% endfor %}

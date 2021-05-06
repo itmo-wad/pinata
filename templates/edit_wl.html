@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edit wishlist</title>
+    <link href= "../static/create.css" rel="stylesheet">
+</head>
+
+<body>
+<h1>Edit your wishlist!</h1>
+<img src="../static/Logo_second.png" alt="pinata" class="img">
+	<div class="wrap3">
+		<div>
+			<a href="{{ url_for('cabinet') }}"><button id="id_button3" class="but" >Cabinet</button></a>
+		</div>
+	</div>
+<div class="list_wrap">
+  <form method="POST" action="/edit/{{id}}" enctype="multipart/form-data">
+	  <label for="title">Wishlist name:</label>
+	  <br>
+	  <br>
+	  <input type="text" name="wl-title" required id="title" value="{{title}}">
+	  
+	  <p class="textform">Input description for your new wishlist</p>
+	  <p><textarea name="description" required class="text_descr">{{description}}</textarea></p>
+	  <hr>
+	  <h1>Items:</h1>
+	  <div id="DynamicExtraFieldsContainer">
+        <div id="addDynamicField">
+		  {% for dict_item in items %}
+                <div class="DynamicExtraField">
+					<br>
+					<input value="Remove item" type="button" class="DeleteDynamicExtraField" onclick="$(this).parent().remove()">
+					<br><br>
+					<label for="item">Item name</label>
+                    <input type="text" name="item-title[]" required id="item" value="{{dict_item['title']}}">
+					<label for="link">Reference</label>
+					<input type="text" name="item-link[]" id="link" placeholder="Link to shop website" value="{{dict_item['link']}}">
+                    <p class="textform">Input description for your new item</p>
+					<p><textarea name="item-descr[]" cols="50">{{dict_item['description']}}</textarea>
+					<br>
+					<img src="../{{dict_item['picture']}}" alt="" class="img"><input type="file" name="file[]" class="forma"></p>
+                    <hr><br>
+					<input type="text" name="old-id[]" value="{{dict_item['itemid']}}" hidden>
+				</div>
+		  {% endfor %}
+	    </div>
+	  </div>
+	  <br>
+	  
+	  <input type="button" id="addDynamicExtraFieldButton" value="Add item" class="button">
+	  <br><br>
+	
+	<hr class="hr">
+	<input type="submit" value="Save" class="button_create">
+	
+   </form>
+</div>
+
+<script src="../static/dynamic_form.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+
+</body>
+</html>

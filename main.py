@@ -4,7 +4,7 @@ from flask_login import LoginManager, login_required, logout_user, UserMixin, lo
 from pymongo import MongoClient
 from src.search import wl_search, wl_show, wl_cabinet
 from src.auth import login, reg
-from src.wishlist import wl_create
+from src.wishlist import wl_create, wl_edit, add_new_list_id, wl_update
 from src.upload import update_avatar
 
 
@@ -93,8 +93,21 @@ def create():
     if request.method == "GET":
         return render_template('create_wl.html')
     else:
-        list_id = wl_create(db, current_user.username, app)
+        list_id = add_new_list_id(current_user.username, db)
+        wl_create(db, current_user.username, list_id, app)
         return redirect('/wishlist/' + list_id)
+
+
+@app.route('/edit/<string:list_id>', methods=["GET", "POST"])
+@login_required
+def edit(list_id):
+    if request.method == "GET":
+        if current_user.is_authenticated and db.wishlists.find_one({"listid": list_id, "owner": current_user.username}):
+            return wl_edit(list_id, db)
+        else:
+            return redirect(url_for('page_not_found'))
+    if request.method == "POST":
+        return wl_update(list_id, db, current_user.username, app)
 
 
 @app.route('/logout')
@@ -120,4 +133,4 @@ def send_from_upload(filename):
 
 
 if __name__ == "__main__":
-    app.run(host='localhost', port=5000, debug=True)
+    app.run(host='localhost', port=5000, debug=False)
