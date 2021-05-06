@@ -101,7 +101,7 @@ def create():
 @app.route('/edit/<string:list_id>', methods=["GET", "POST"])
 @login_required
 def edit(list_id):
-    if current_user.is_authenticated and db.wishlists.find_one({"listid": list_id, "owner": current_user.username}):
+    if db.wishlists.find_one({"listid": list_id, "owner": current_user.username}):
         if request.method == "GET":
             return wl_edit(list_id, db)
         if request.method == "POST":
@@ -112,13 +112,13 @@ def edit(list_id):
 @app.route('/delete/<string:list_id>', methods=["GET", "POST"])
 @login_required
 def delete(list_id):
-    if current_user.is_authenticated and db.wishlists.find_one({"listid": list_id, "owner": current_user.username}):
+    if db.wishlists.find_one({"listid": list_id, "owner": current_user.username}):
         if request.method == "GET":
-            return render_template('delete.html')
+            return render_template('delete.html', title=db.wishlists.find_one({"listid": list_id})["title"])
         if request.method == "POST":
             return wl_delete(list_id, db, current_user.username)
     else:
-        return redirect('/')
+        return render_template('invalid.html') #redirect('/')
 
 
 @app.route('/logout')

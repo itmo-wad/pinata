@@ -70,7 +70,7 @@ def wl_update(list_id, db, username, app):
         photos = request.files.getlist("file[]")
 
         paths = update_item_photo(photos, app)
-
+        num_old = 0
         if request.form.get("old-id[]"):
             old_ids = request.form.getlist("old-id[]")
             num_old = len(old_ids)
@@ -100,8 +100,7 @@ def wl_update(list_id, db, username, app):
 
         return redirect('../wishlist/' + list_id)
     else:
-        return wl_delete(list_id, db, username)
-        #return "<script>alert('we will delete everything')</script>"
+        return redirect('/delete/' + list_id) #wl_delete(list_id, db, username)
 
 
 def wl_delete(list_id, db, username):
