@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal cabinet</title>
+    <link rel="stylesheet" href="../bootstrap/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+    <link href= "../static/cabinet.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <div class="row ">
+
+            <div class="col-lg-4">
+
+            </div>
+
+
+            <div class="col-lg-4 col-12 d-flex justify-content-center text-center">
+                <div class="wrap1">
+                
+                    <div class="main_img">
+                        <figure>
+                            <img src="../static/avatar.jpg" alt="avatar" class="avatar">
+                        <!-- <figcaption>{{owner}}</figcaption> -->
+                        </figure>
+                    </div>
+                    <div class="hola">
+                        <h1> Hola, <b>{{username}}!</b></h1>
+                    </div>
+
+               
+                </div><!-- wrap1 -->
+            
+            </div><!-- col-sm-->
+
+
+            <div class="col-lg-4">
+                <div class="pull">
+                    <button class="button3"><a href="{{ url_for('logout') }}"></a>Log out</a></button> 
+                </div>
+                <div class="pull">
+                    <a href="{{ url_for('create') }}" class="but"><button class="button2">+ New wishlist</button></a> 
+                </div>
+            </div>
+            
+        </div> <!-- row-->
+
+        
+            <div class="col-12">
+                <div class="wrap2">
+                    <form id="text" method="POST" action="/cabinet">
+                        <div>
+                            <p><textarea name="search" placeholder="Input wishlist ID" required form="text" class="inp"></textarea></p>
+                            <input type="submit" id="id_button1" value="Find wishlist">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="wrap4">
+        <div class="container">
+       
+            <div class="items_wrap">
+                <h1 id="title">Your wishlists</h1>
+                
+                
+                    <div class="column">
+                        <div class="wishlists">
+                            <div class=" col-6 col-xl-3 d-flex justify-content-center text-center" >
+                                <div class="wishlist" id="item1">
+                                    <p class="title_item">{{dict_item['title']}}</p>
+                                    <p>{{dict_item['description']}}</p>
+                                    <p>{{dict_item['listid']}}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-xl-3 d-flex justify-content-center text-center">
+                                <div class="wishlist" id="item1">
+                                    <p class="title_item">{{dict_item['title']}}</p>
+                                    <p>{{dict_item['description']}}</p>
+                                    <p>{{dict_item['listid']}}</p>
+                                </div>
+                            </div> 
+                            
+                            <div class="col-6 col-xl-3 d-flex justify-content-center text-center">
+                                <div class="wishlist" id="item1">
+                                    <p class="title_item">{{dict_item['title']}}</p>
+                                    <p>{{dict_item['description']}}</p>
+                                    <p>{{dict_item['listid']}}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-xl-3 d-flex justify-content-center text-center">
+                                <div class="wishlist" id="item1">
+                                    <p class="title_item">{{dict_item['title']}}</p>
+                                    <p>{{dict_item['description']}}</p>
+                                    <p>{{dict_item['listid']}}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-xl-3 d-flex justify-content-center text-center">
+                                <div class="wishlist" id="item1">
+                                    <p class="title_item">{{dict_item['title']}}</p>
+                                    <p>{{dict_item['description']}}</p>
+                                    <p>{{dict_item['listid']}}</p>
+                                </div>
+                            </div>
+
+                            <div class="col-6 col-xl-3 d-flex justify-content-center text-center">
+                                <div class="wishlist" id="item1">
+                                    <p class="title_item">{{dict_item['title']}}</p>
+                                    <p>{{dict_item['description']}}</p>
+                                    <p>{{dict_item['listid']}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+
+
+
+</div>
+    
+</div>
+
+
+<script src="../static/script.js">
+</script>
+</body>
+</html>

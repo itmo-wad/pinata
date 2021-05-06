@@ -6,6 +6,13 @@
   </head>
   <body>
     <h1>Wishlist</h1>
+    <div class="button_one">
+        <a href="{{ url_for('index') }}" class="but"><button class="but" id="id_button1">Main page</button></a>
+    </div>
+    <div class="button_two">
+        <a href="{{ url_for('auth') }}" class="but"><button class="but" id="id_button2" >{{go_back_link}}</button></a>
+    </div>
+    
     <figure>
         <img src="../static/avatar.jpg" alt="avatar" class="avatar">
         <figcaption>{{owner}}</figcaption>

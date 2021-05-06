@@ -109,3 +109,43 @@ figcaption {
     width: 80px;
     height: 70px;
 }
+
+.button_one{
+    position: absolute;
+    top: 2%; 
+    right: 2%;
+}
+
+.button_two{
+    position: absolute;
+    top: 2%; 
+    right: 13%;
+}
+
+#id_button1{
+    margin-top: 40px;
+    background-color: #baf7e4;
+    border: 2px solid rgb(151, 166, 182);
+    color: rgb(29, 18, 34);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+}
+
+#id_button2{
+    margin-top: 40px;
+    background-color: #baddf7;
+    border: 2px solid rgb(151, 166, 182);
+    color: rgb(29, 18, 34);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+}

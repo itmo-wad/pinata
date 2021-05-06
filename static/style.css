@@ -4,7 +4,18 @@ html{
 
 body{
     text-align: center;
-    background-color: rgb(235, 197, 235);
+    
+      margin-top: 40px;
+      background-color: rgba(252, 252, 252, 0.577);
+      background-image: url("clo.jpg");
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      -webkit-background-size: cover;
+      -moz-background-size: cover;
+      -o-background-size: cover;
+      background-size: cover;
+  
 
 }
 
@@ -18,8 +29,9 @@ h1{
 textarea {
     resize: none;
     height: 50px;
-    width: 300px;
+    width: 500px;
     font-size: 30px;
+    text-align: center;
  }
 
  #id_button1{
@@ -48,7 +60,7 @@ textarea {
 }
 
 #id_button3{
-  background-color: rgb(124, 247, 245);
+  background-color: #f6e0fa;
   color: rgb(68, 21, 169);
   margin-left: 40px;
   margin-right: 50px;
@@ -62,7 +74,7 @@ textarea {
 
 #description{
   margin-top: 0px;
-  font-size: 30px;
+  font-size: 40px;
   background: -webkit-linear-gradient(rgb(77, 9, 172), rgb(213, 28, 31));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -124,3 +136,4 @@ textarea {
   min-height: 54px;
   resize: none;
 }
+
