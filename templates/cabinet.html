@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Personal cabinet</title>
-    
     <link href= "../static/cabinet.css" rel="stylesheet">
 </head>
 
@@ -13,15 +12,19 @@
     <div class="wrap1">
         <div class="main_img">
             <figure>
-                <img src="../static/avatar.jpg" alt="avatar" class="avatar">
-            <!-- <figcaption>{{owner}}</figcaption> -->
+              <img src="{{photo}}" alt="avatar" class="avatar">
+              <figcaption>{{owner}}</figcaption>
+              <form method="POST" enctype="multipart/form-data" action="/cabinet">
+                <input type="file" name="file">
+                <input type="submit" value="Update photo">
+              </form>
             </figure>
         </div>
 
         <div class="hola">
             <h1> Hola, <b>{{username}}!</b></h1>
         </div>
-        
+
     </div>
 
     <div class="wrap3">
@@ -31,38 +34,10 @@
     </div>
 
     <div class="wrap5">
-        <button class="button3"><a href="{{ url_for('logout') }}">Log out</a></button>  
+        <button class="button3"><a href="{{ url_for('logout') }}">Log out</a></button>
     </div>
 </div>
 
-    <div class="wrap2">
-        <form id="text" method="POST" action="/">
-            <div>
-                <p><textarea name="search" placeholder="Input wishlist ID" required form="text"></textarea></p>
-                <input type="submit" id="id_button1" value="Find wishlist">
-            </div>
-        </form>
-    </div>
-
-    
-
-    <div class="wrap4">
-        <div class="items_wrap">
-            <h1 id="title">Your wishlists</h1>
-            <div class="wishlists">
-                {% for dict_item in wishlists %}
-                    <div class="wishlist" id="item1">
-                        <p>{{dict_item['title']}}</p>
-                        <p>{{dict_item['description']}}</p>
-                        <p>{{dict_item['listid']}}</p>
-                    </div>
-                    
-                {% endfor %}
-            </div>
-            <!-- <p><input type="submit" value="Save"></p> -->
-            <!-- </form>-->
-        </div>
-    
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             {% for category, message in messages %}
@@ -73,9 +48,39 @@
         {% endif %}
         {% endwith %}
 
-</div>
+    <div class="wrap2">
+        <form id="text" method="POST" action="/cabinet">
+            <div>
+                <p><textarea name="search" placeholder="Input wishlist ID" required form="text"></textarea></p>
+                <input type="submit" id="id_button1" value="Find wishlist">
+            </div>
+        </form>
+    </div>
 
-<script src="../static/script.js">
-</script>
+
+
+    <div class="wrap4">
+        <div class="items_wrap">
+            <h1 id="title">Your wishlists</h1>
+            <div class="wishlists">
+                {% for dict_item in wishlists %}
+                    <div class="wishlist" id="item1">
+                        <p>{{dict_item['title']}}</p>
+                        <p>{{dict_item['description']}}</p>
+                        <p><a href="{{ url_for('wishlist',list_id=dict_item['listid']) }}">Open</a></p>
+                        <p><a href="{{ url_for('edit',list_id=dict_item['listid']) }}">Edit</a></p>
+                        <p><a href="{{ url_for('delete',list_id=dict_item['listid']) }}">Delete</a></p>
+                        <p>ID: {{dict_item['listid']}}</p>
+                    </div>
+                {% endfor %}
+            </div>
+            <!-- <p><input type="submit" value="Save"></p> -->
+            <!-- </form>-->
+        </div>
+
+
+
+</div>
+<script src="../static/script.js"></script>
 </body>
 </html>
