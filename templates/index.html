@@ -27,22 +27,22 @@
     </div>
     <br>
 
-
     <form id="text" method="POST" action="/">
         <div>
             <p><textarea name="search" placeholder="Input wishlist ID" required form="text"></textarea></p>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+             {% if messages %}
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}" role="alert">
+                    {{ message }}
+                 </div>
+                {% endfor %}
+             {% endif %}
+             {% endwith %}
+            <br>
             <input type="submit" id="id_button1" value="Find wishlist">
         </div>
     </form>
-    {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        {% for category, message in messages %}
-          <div class="alert alert-{{ category }}" role="alert">
-            {{ message }}
-          </div>
-        {% endfor %}
-      {% endif %}
-    {% endwith %}
 
     <script src="../static/script.js">
     </script>
