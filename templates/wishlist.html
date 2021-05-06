@@ -6,6 +6,13 @@
   </head>
   <body>
     <h1>Wishlist</h1>
+    <div class="button_one">
+        <a href="{{ url_for('index') }}" class="but"><button class="but" id="id_button1">Main page</button></a>
+    </div>
+    <div class="button_two">
+        <a href="{{ url_for('auth') }}" class="but"><button class="but" id="id_button2" >{{go_back_link}}</button></a>
+    </div>
+
     <figure>
         <img src="{{photo}}" alt="avatar" class="avatar">
         <figcaption>{{owner}}</figcaption>
@@ -45,11 +52,6 @@
         </div>
         <!-- <p><input type="submit" value="Save"></p> -->
         <!-- </form>-->
-        <div class="buttons">
-            <a href="{{ url_for('index') }}" class="but"><button class="but" id="id_button2">Main page</button></a>
-           <!-- <a href="{{ url_for('cabinet') }}" class="but"><button class="but" id="id_button3" >Cabinet</button></a> -->
-            <a href="{{ url_for('auth') }}" class="but"><button class="but" id="id_button3" >{{go_back_link}}</button></a>
-        </div>
     </div>
   </body>
 </html>
