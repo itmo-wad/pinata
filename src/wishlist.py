@@ -1,4 +1,4 @@
-from flask import request, render_template
+from flask import request, render_template, redirect
 from pymongo import MongoClient 
 import os
 from datetime import datetime
@@ -58,3 +58,45 @@ def wl_edit(list_id, db):
                            title=db.wishlists.find_one({"listid": list_id})['title'],
                            description=db.wishlists.find_one({"listid": list_id})['description'],
                            items=items_dic)
+
+
+def wl_update(list_id, db, username, app):
+    if request.form.get("item-title[]"):
+        wl_title = request.form["wl-title"]
+        wl_description = request.form["description"]
+        item_names = request.form.getlist("item-title[]")
+        links = request.form.getlist("item-link[]")
+        descriptions = request.form.getlist("item-descr[]")
+        photos = request.files.getlist("file[]")
+
+        paths = update_item_photo(photos, app)
+
+        if request.form.get("old-id[]"):
+            old_ids = request.form.getlist("old-id[]")
+            num_old = len(old_ids)
+            for i in range(num_old):
+                if paths[i] == "../static/default_item_photo.jpg":
+                    paths[i] = db.items.find_one({"itemid": old_ids[i]})["picture"]
+
+        items = []
+        for i in range(len(item_names)):
+            if i < num_old:
+                items.append(old_ids[i])
+                db.items.update({"itemid": old_ids[i]}, {"$set": {"title": item_names[i],"description": descriptions[i],
+                                 "link": links[i], "picture": paths[i], "reserved": "0",
+                                 "date": str(datetime.now().date())}})
+            else:
+                item_id = list_id + "-" + os.urandom(3).hex()
+                while item_id in items:
+                    item_id = list_id + "-" + os.urandom(3).hex()
+                items.append(item_id)
+                db.items.insert({"itemid": item_id, "title": item_names[i], "description": descriptions[i],
+                                 "link": links[i], "picture": paths[i], "reserved": "0",
+                                 "date": str(datetime.now().date())})
+
+        db.wishlists.update({"listid": list_id}, {"$set": {"title": wl_title, "owner": username,
+                                                           "description": wl_description, "items": str(items)}})
+
+        return redirect('../wishlist/' + list_id)
+    else:
+        return "<script>alert('we will delete everything')</script>"

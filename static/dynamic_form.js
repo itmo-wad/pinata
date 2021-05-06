@@ -13,7 +13,7 @@ document.getElementById("addDynamicExtraFieldButton").onclick = function(event) 
 	$('<p>').appendTo(div);
 	$('<label/>', {for : "item"}).html("Item name ").appendTo(div); //	<label for="item">Item name:</label>
 	$('<input/>', {name : 'item-title[]', type : 'text', id : 'item', required :''}).appendTo(div);// <input type="text" name="item-title[]" id="item">
-	$('<label/>', {for : "link"}).html(" Reference: ").appendTo(div); //	<label for="link">Reference:</label>
+	$('<label/>', {for : "link"}).html(" Reference ").appendTo(div); //	<label for="link">Reference:</label>
 	$('<input/>', {name : 'item-link[]', type : 'text', placeholder : " Link to shop website", id : 'link' }).appendTo(div);	// <input type="text" name="item-link[]" id="link" placeholder="Input link to store">
 	$('</p>').appendTo(div);
 	$('<p>', {class: 'textform'}).html("Input description for your new item").appendTo(div);
