@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Personal cabinet</title>
+   <!-- <link rel="stylesheet" href="../bootstrap/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="../bootstrap/bootstrap-grid.min.css">
+    <link rel="stylesheet" href="../bootstrap/bootstrap.min.css">
+    <link href= "../static/cabinet.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid">
+
+        <div class="row ">
+
+            <div class="col-lg-4">
+
+            </div>
+
+
+            <div class="col-lg-4 col-12 d-flex justify-content-center text-center">
+                <div class="wrap1">
+
+                    <div class="main_img">
+                        <figure>
+                            <img src="{{photo}}" alt="avatar" class="avatar">
+                            <figcaption>{{owner}}</figcaption>
+                            <form method="POST" enctype="multipart/form-data" action="/cabinet">
+                                 <input type="file" name="file">
+                                 <input type="submit" value="Update photo">
+                            </form>
+                        </figure>
+                    </div>
+                    <div class="hola">
+                        <h1> Hola, <b>{{username}}!</b></h1>
+                    </div>
+
+
+                </div><!-- wrap1 -->
+
+            </div><!-- col-sm-->
+
+
+            <div class="col-lg-4">
+                <div class="pull">
+                    <a href="{{ url_for('logout') }}" class="but"><button class="button3">Log out</button></a>
+                </div>
+                <div class="pull">
+                    <a href="{{ url_for('create') }}" class="but"><button class="button2">+ New wishlist</button></a>
+                </div>
+            </div>
+
+        </div> <!-- row-->
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            <div class="alert alert-{{ category }}" role="alert" id="flash">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+            <div class="col-12">
+                <div class="wrap2">
+                    <form id="text" method="POST" action="/cabinet">
+                        <div>
+                            <p><textarea name="search" placeholder="Input wishlist ID" required form="text" class="inp">                                                </textarea></p>
+                            <input type="submit" id="id_button1" value="Find wishlist">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+    <div class="wrap4">
+        <div class="container">
+
+            <div class="items_wrap">
+                <h1 id="title">Your wishlists</h1>
+
+
+                    <div class="column">
+                        <div class="wishlists">
+                           {% for dict_item in wishlists %}
+                            <div class=" col-6 col-xl-3 d-flex justify-content-center text-center" >
+                                <div class="wishlist" id="item1">
+                                    <div class="wishlist" id="item1">
+                                        <p class="title_item">{{dict_item['title']}}</p>
+                                        <p>{{dict_item['description']}}</p>
+                                        <p><a href="{{ url_for('wishlist',list_id=dict_item['listid']) }}">Open</a></p>
+                                        <p><a href="{{ url_for('edit',list_id=dict_item['listid']) }}">Edit</a></p>
+                                        <p><a href="{{ url_for('delete',list_id=dict_item['listid']) }}">Delete</a></p>
+                                        <p>ID: {{dict_item['listid']}}</p>
+                                    </div>
+                                 </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+
+</div>
+
+</div>
+
+</body>
+</html>
+
