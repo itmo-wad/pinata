@@ -143,5 +143,10 @@ def send_from_upload(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
+@app.route('/bootstrap/<path:filename>')
+def send_bootstrap(filename):
+    return send_from_directory('bootstrap', filename)
+
+
 if __name__ == "__main__":
     app.run(host='localhost', port=5000, debug=False)
